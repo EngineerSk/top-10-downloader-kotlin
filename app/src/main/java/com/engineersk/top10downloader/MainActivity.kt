@@ -73,11 +73,16 @@ class MainActivity : AppCompatActivity() {
                 super.onPostExecute(result)
                 val parseApplications = ParseApplications()
                 parseApplications.parse(result)
-                val arrayAdapter = ArrayAdapter(
-                    propContext, R.layout.list_item,
+//                val arrayAdapter = ArrayAdapter(
+//                    propContext, R.layout.list_item,
+//                    parseApplications.applications
+//                )
+
+                val feedAdapter = FeedAdapter(
+                    propContext, R.layout.list_record,
                     parseApplications.applications
                 )
-                propListView.adapter = arrayAdapter
+                propListView.adapter = feedAdapter
             }
 
             private fun downloadXML(urlPath: String?): String {
