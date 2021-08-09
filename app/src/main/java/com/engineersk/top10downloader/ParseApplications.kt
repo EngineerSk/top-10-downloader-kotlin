@@ -7,7 +7,7 @@ import org.xmlpull.v1.XmlPullParserFactory
 
 class ParseApplications {
     private val TAG = "ParseApplications"
-    public val applications: ArrayList<FeedEntry> = ArrayList()
+    val applications: ArrayList<FeedEntry> = ArrayList()
 
     fun parse(xmlData: String): Boolean {
         Log.d(TAG, "parse called with $xmlData")
@@ -26,14 +26,14 @@ class ParseApplications {
                 val tagName = xmlPullParser.name?.toString()?.toLowerCase()
                 when(eventType){
                     XmlPullParser.START_TAG -> {
-                        Log.d(TAG, "parse: String tag for $tagName")
+//                        Log.d(TAG, "parse: String tag for $tagName")
                         if(tagName == "entry")
                             inEntry = true
 
                     }
                     XmlPullParser.TEXT -> textValue = xmlPullParser.text
                     XmlPullParser.END_TAG -> {
-                        Log.d(TAG, "parse: ending tag for $tagName")
+//                        Log.d(TAG, "parse: ending tag for $tagName")
                         if(inEntry){
                             when(tagName){
                                 "entry"->{
@@ -55,10 +55,10 @@ class ParseApplications {
 
             }
 
-            for (app in applications){
-                Log.d(TAG, "***********************")
-                Log.d(TAG, app.toString())
-            }
+//            for (app in applications){
+//                Log.d(TAG, "***********************")
+//                Log.d(TAG, app.toString())
+//            }
         } catch (e: XmlPullParserException) {
             e.printStackTrace()
             status = false
