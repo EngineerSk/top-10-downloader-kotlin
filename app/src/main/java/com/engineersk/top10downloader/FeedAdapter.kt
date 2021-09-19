@@ -1,12 +1,10 @@
 package com.engineersk.top10downloader
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.TextView
 import com.google.android.material.textview.MaterialTextView
 
 class ViewHolder(view: View) {
@@ -17,10 +15,8 @@ class ViewHolder(view: View) {
 
 class FeedAdapter(
     context: Context, private val resource: Int,
-    private val applications: List<FeedEntry>
-) : ArrayAdapter<FeedEntry>(context, resource) {
+    private var applications: List<FeedEntry?>) : ArrayAdapter<FeedEntry>(context, resource) {
 
-    private val TAG = "FeedAdapter"
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun getCount(): Int {
@@ -41,10 +37,15 @@ class FeedAdapter(
 
         val currentApplication = applications[position]
 
-        viewHolder.tvName.text = currentApplication.name
-        viewHolder.tvArtist.text = currentApplication.artist
-        viewHolder.tvSummary.text = currentApplication.summary
+        viewHolder.tvName.text = currentApplication?.name
+        viewHolder.tvArtist.text = currentApplication?.artist
+        viewHolder.tvSummary.text = currentApplication?.summary
 
         return view
+    }
+
+    fun setFeedList(feedList: List<FeedEntry?>) {
+        this.applications = feedList
+        notifyDataSetChanged()
     }
 }
